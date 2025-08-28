@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/static/bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>✏️ Edit Task</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="task" class="form-label">Task Name</label>
+            <input type="text" class="form-control" name="task" id="task" value="{{ task.name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3">{{ task.description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="due_date" class="form-label">Due Date & Time</label>
+            <input type="datetime-local" class="form-control" name="due_date" id="due_date"
+                   value="{{ task.due_date.strftime('%Y-%m-%dT%H:%M') if task.due_date }}">
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Update Task</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
